@@ -18,12 +18,18 @@
         $user = $_REQUEST['user'];
      }
      if(isset($_REQUEST['password'])){
-        $password = $_REQUEST['password'];
+        $password = md5($_REQUEST['password']);
      }
      //$password = md5($password);
      //print_r($GLOBALS);
-     //echo md5($password);
-     if($user == 'root' &&  $password == 'Admin1234!'){//'d41d8cd98f00b204e9800998ecf8427e'){
+     //echo $password;
+     /*
+     <?php
+        $mysqli = new mysqli("localhost", "root", "", "sysadmin");
+	    $result = $mysqli->query("SELECT count(username) FROM users WHERE username = ".$user." AND password = ".$password);
+    ?>
+     */
+     if($user == 'root' &&  $password == '552b2ebe774bb5aaa0ad2021da259d22'){//Admin1234!
         $_SESSION['usr'] = $user;
         echo '<a href="logout.php">Cerrar Session</a>';
         header("Location:index.php");
