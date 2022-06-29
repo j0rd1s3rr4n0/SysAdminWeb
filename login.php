@@ -12,7 +12,7 @@
      }
 
      if($respuesta != 0){
-        echo '<span style="background-color:red;color:white; padding:10px;border-radius:15px;">Username Or Password Invalid!</span>';
+        echo '<div style="display:block;position:absolute;top:25%;left:5%;"><span style="background-color:red;color:white; padding:10px;border-radius:15px;">Username Or Password Invalid!</span></div>';
     }
      if(isset($_REQUEST['user'])){
         $user = $_REQUEST['user'];
@@ -22,7 +22,7 @@
      }
      //$password = md5($password);
      //print_r($GLOBALS);
-     echo $password;
+     //echo $password;
      /*
      <?php
         $mysqli = new mysqli("localhost", "root", "", "bluegraded");
@@ -37,8 +37,8 @@
     <?php
 
 ?>
-     */
 
+/* BBDD CONEXION*/
 $servername = "127.0.0.1";
 $username_db = "root";
 $password_db = "";
@@ -50,21 +50,22 @@ $conn = new mysqli($servername, $username_db, $password_db, $dbname);
 if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
-
-$sql = 'SELECT count(username) FROM usr WHERE username = "'.$user.'" AND passwd = "'.$password.'"';
-$result = $conn->query($sql);
-
-if ($result->num_rows > 0) {
-  // output data of each row
-  while($row = $result->fetch_assoc()) {
-    if(intval($row['count(username)']) > 0){
-        $_SESSION['usr'] = $user;
-        echo '<a href="logout.php">Cerrar Session</a>';
-        header("Location:index.php");
+if(isset($_REQUEST['user']) && isset($_REQUEST['password'])){
+if($user!=null && $password !=null){
+        $sql = 'SELECT count(username) FROM usr WHERE username = "'.$user.'" AND passwd = "'.$password.'"';
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+                if(intval($row['count(username)']) > 0){
+                    $_SESSION['usr'] = $user;
+                    echo '<a href="logout.php">Cerrar Session</a>';
+                    header("Location:index.php");
+                }
+            }
+        }else{
+            $respuesta =1;
+        }
     }
-    }
-} else {
-  echo "0 results";
 }
 $conn->close();
 
@@ -87,7 +88,7 @@ $conn->close();
     <nav class="navbar text-light bg-dark justify-content-end">
         <ul class="nav">
         <li class="nav-item">
-            <a class="nav-link" href="projeto-lyceum-login.html">
+            <a class="nav-link" href="login.php">
                 <i class="fas fa-user"></i> Login
             </a>
         </li>
@@ -115,7 +116,7 @@ $conn->close();
 
 </script>
 <div style="margin:0 auto; width:250px;height:250px;margin-top:30vh;">
-    <form action="login.php" method="get" style="margin:20px;">
+    <form action="login.php" method="post" style="margin:20px;">
         <label for="user"><h5><b>Username</b></h5></label>
         <input type="text" name="user">
     </br>
