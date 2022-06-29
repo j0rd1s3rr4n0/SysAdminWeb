@@ -22,18 +22,53 @@
      }
      //$password = md5($password);
      //print_r($GLOBALS);
-     //echo $password;
+     echo $password;
      /*
      <?php
-        $mysqli = new mysqli("localhost", "root", "", "sysadmin");
-	    $result = $mysqli->query("SELECT count(username) FROM users WHERE username = ".$user." AND password = ".$password);
+        $mysqli = new mysqli("localhost", "root", "", "bluegraded");
+	    $result = $mysqli->query("SELECT count(username) FROM users WHERE username = ".$user." AND passwd = ".$password);
     ?>
-     */
      if($user == 'root' &&  $password == '552b2ebe774bb5aaa0ad2021da259d22'){//Admin1234!
         $_SESSION['usr'] = $user;
         echo '<a href="logout.php">Cerrar Session</a>';
         header("Location:index.php");
      }
+     
+    <?php
+
+?>
+     */
+
+$servername = "127.0.0.1";
+$username_db = "root";
+$password_db = "";
+$dbname = "bluegraded";
+
+// Create connection
+$conn = new mysqli($servername, $username_db, $password_db, $dbname);
+// Check connection
+if ($conn->connect_error) {
+  die("Connection failed: " . $conn->connect_error);
+}
+
+$sql = 'SELECT count(username) FROM usr WHERE username = "'.$user.'" AND passwd = "'.$password.'"';
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+  // output data of each row
+  while($row = $result->fetch_assoc()) {
+    if(intval($row['count(username)']) > 0){
+        $_SESSION['usr'] = $user;
+        echo '<a href="logout.php">Cerrar Session</a>';
+        header("Location:index.php");
+    }
+    }
+} else {
+  echo "0 results";
+}
+$conn->close();
+
+    
 ?>
 
 <!DOCTYPE html>
