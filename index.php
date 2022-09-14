@@ -81,41 +81,55 @@
         }
 
     </style>
+    
 <center><h1 style="font-size:450%">CONTROLS</h1></center>
 <div class="wrapper">
+<?php
+if(isset($_SESSION['usr'])){
+  echo'
+  <div class="options-admin">
+  <img src="./Assets/images/terminal.png" class="image-option"></br>
+  <p>Controla la terminal del dispositivo</p>
+</div>
 
-    <div class="options-admin">
-        <img src="./Assets/images/terminal.png" class="image-option"></br>
-        <p>Controla la terminal del dispositivo</p>
-    </div>
-    
-    <div class="options-admin">
-        <a href="speedtest.php" onclick="alert('Este proceso puede demorar unos minutos. Porfavor Espere');">
-            <img src="./Assets/images/speedtest.png" class="image-option"></br>
-            <p>Mide la Velocidad de Internet que tiene posee tu red</p>
-        </a>
-    </div>
+<div class="options-admin">
+  <a href="speedtest.php" onclick="alert(\'Este proceso puede demorar unos minutos. Porfavor Espere\');">
+      <img src="./Assets/images/speedtest.png" class="image-option"></br>
+      <p>Mide la Velocidad de Internet que tiene posee tu red</p>
+  </a>
+</div>
 
-    <div class="options-admin">
-        <img src="./Assets/images/eraseinfo.png" class="image-option"></br>
-        <p>Elimina información del disco</p>
-    </div>
+<div class="options-admin">
+  <img src="./Assets/images/eraseinfo.png" class="image-option"></br>
+  <p>Elimina información del disco</p>
+</div>
 
-    <div class="options-admin">
-        <img src="./Assets/images/adminuser.png" style="filter:invert(1)" class="image-option"></br>
-        <p>Administre los usuarios del sistema. Recupere Contraseñas asigne nuevos,elimine usuarios...</p>
-    </div>
+<div class="options-admin">
+  <img src="./Assets/images/adminuser.png" style="filter:invert(1)" class="image-option"></br>
+  <p>Administre los usuarios del sistema. Recupere Contraseñas asigne nuevos,elimine usuarios...</p>
+</div>
 
-    <div class="options-admin">
-        <img src="./Assets/images/terminal.png" class="image-option"></br>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-    </div>
+<div class="options-admin">
+  <img src="./Assets/images/terminal.png" class="image-option"></br>
+  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+</div>
 
-    <div class="options-admin">
-        <img src="./Assets/images/terminal.png" class="image-option"></br>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-    </div>
+<div class="options-admin">
+  <img src="./Assets/images/terminal.png" class="image-option"></br>
+  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+</div>
 
+  ';
+}else{
+    echo '
+        <center>
+            <h3 style="border:1px solid red;width:80vw;margin:0;">
+                401 - User Not Autorized
+            </h3>
+        </center>
+    ';
+}
+?>
 </div>
 
 
